@@ -58,18 +58,21 @@ hook 'before' => sub {
 };
 
 get '/check/:word.:format' => sub {
-    debug( 'checking word '. param('word'). 'using language '. $speller->get_option( 'lang' ) );
+    my $language = $speller->get_option( 'lang' );
+    debug( 'checking word '. param('word'). 'using language '. $language);
     my $response = {
+        language => $language,
         check => $speller->check(param('word')),
     };
 
-    unless( $response->{check} ) {
+    my $max_suggestions = param('max_suggestions') || 3;
+    if( not $response->{check} or param('always_suggest') ) {
 
-        debug( 'getting suggestions for word '. param('word'). 'using language '. $speller->get_option( 'lang' ) );
+        debug( 'getting suggestions for word '. param('word'). 'using language '. $language);
         my @guesses = $speller->suggest( param('word') );
 
         # this splice setting could be tweaked, made optional upon parameterization, sent as short_list and full_list, or completely left out
-        $response->{suggestions} = [ splice( @guesses, 0, 3 ) ];
+        $response->{suggestions} = [ splice( @guesses, 0, $max_suggestions ) ];
     }
 
     $response;

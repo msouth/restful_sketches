@@ -1,0 +1,41 @@
+<!-- div style="position: absolute; left: 50px; top: 50px;" -->
+<div style="margin-left: 50px; margin-top: 50px;">
+
+    <h4>Services available are:</h4>
+
+    <ul>
+
+        <li> /check/[your_word].[serialization extension]?language=[language specification, defaults to en_US] </li>
+
+        <li> /dictionaries/list.[serialization extension] (to list the availalble dictionaries, e.g. try GET /dictionaries/list.json ) </li>
+
+    </ul>
+
+    <h5> Examples:
+
+    <ul>
+        <li> A GET request for '/check/gringor.json?language=en' returns:
+            <pre><code>
+            {
+               "suggestions" : [
+                  "gringo",
+                  "gringos",
+                  "goring"
+               ],
+               "check" : 0
+            }
+            </code> </pre>
+        </li>
+
+        <li> A GET request for '/check/color.yml?language=en_GB' returns:
+            <pre><code>
+            ---
+            check: 0
+            suggestions:
+              - colour
+              - col or
+              - col-or
+            </code></pre>
+        </li>
+    </ul>
+</div>

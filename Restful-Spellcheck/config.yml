@@ -26,3 +26,4 @@ template: "simple"
 #     start_tag: '[%'
 #     end_tag:   '%]'
 
+default_max_suggestions: 5

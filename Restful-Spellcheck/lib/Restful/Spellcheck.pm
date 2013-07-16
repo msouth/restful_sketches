@@ -65,7 +65,7 @@ get '/check/:word.:format' => sub {
         check => $speller->check(param('word')),
     };
 
-    my $max_suggestions = param('max_suggestions') || 3;
+    my $max_suggestions = param('max_suggestions') || config->{default_max_suggestions} || 3;
     if( not $response->{check} or param('always_suggest') ) {
 
         debug( 'getting suggestions for word '. param('word'). 'using language '. $language);

@@ -12,6 +12,7 @@ files are just the default files generated from
 
 # Restful::Spellcheck #
 
+-------------------------
 The spellcheck uses aspell.  You can hit it with a GET to 
 
     /check/foo.json
@@ -69,10 +70,12 @@ telling you how to get the list of available dictionaries.
 
 See Makefile.PL for required modules, some of which will
 require libraries or binaries (e.g. aspell).
+
 -------------------------
 
 # Restful::Thumbs #
 
+-------------------------
 This service is a bit more involved.  Given a url, a requested size,
 and an optional image format (specified as a three letter extension),
 it will return a thumbnail generated from the image at the given
@@ -147,3 +150,4 @@ parameter could say 'force_recreate" or something would also work).
 
 See Makefile.PL for required modules, some of which will
 require libraries or binaries (e.g. Image Magick).
+

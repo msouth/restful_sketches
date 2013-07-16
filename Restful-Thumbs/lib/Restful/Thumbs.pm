@@ -110,6 +110,9 @@ any[ 'post', 'get'] => '/generate/thumb' => sub {
     debug Dumper($type) ; use Data::Dumper;
 
     my $original_ext = normalize_ext( $type->{file_type} );
+    # now that we know the source file's extension, default to that
+    # if they didnt give us one
+    $ext ||= $original_ext;
 
     debug ( "after calling normalize with $type->{file_type}, original_ext is [$original_ext]");
 

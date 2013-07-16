@@ -103,6 +103,10 @@ any[ 'post', 'get'] => '/generate/thumb' => sub {
 
     # gives (all caps) jpeg, gif, png, etc at $type->{file_type}
     my $type = Image::Info::image_type( \$data);
+    if ($type->{error}) {
+        # 400 is sketchy here--but so is every other 4xx.  Status codes are lame for REST
+        send_error( 'The data retrieved at the requested url was not a recognized image format', 400 );
+    }
     debug Dumper($type) ; use Data::Dumper;
 
     my $original_ext = normalize_ext( $type->{file_type} );
@@ -137,7 +141,7 @@ any[ 'post', 'get'] => '/generate/thumb' => sub {
 
     # redirecting here because the client can use the simpler url in the future, and modify it to get
     # other formats or sizes with the cleaner url
-    redirect path( 'thumb', $url_id, "$size.$ext" );
+    redirect path( 'thumb', $url_id, "$size.$ext" ), 301;
     send_file $cache_file ;
     
 };

@@ -62,6 +62,11 @@ The default_max_suggestions configuration option sets the default
 value in absence of a max_suggestions parameter--in absence of the
 config setting it defaults to three suggestions.
 
+Requesting a language that doesn't exist gives you a message
+telling you how to get the list of available dictionaries.
+
+See Makefile.PL for required modules, some of which will
+require libraries or binaries (e.g. aspell).
 -------------------------
 
 # Restful::Thumbs #
@@ -121,12 +126,22 @@ the picture.
 
 At the end of this interaction, the command line redirect target
 "bob.jpg" holds the requested thumbnail (in the default 100x100
-size, and in jpeg format because the source was).  But the url in
+size, and in jpeg format, because the source was a jpeg).  But the url in
 the Location: header can be used to access that file from now on.
-It is also possible to request, for example,
+
+From this point forward, it is also possible to request, for example,
 http://localhost:3000/thumb/7/100x100.png to get a png version or
 http://localhost:3000/thumb/7/300x300.jpg to get a larger jpeg.
 
 'size' and 'ext' parameters may also be put into the query string
 (or post data) in /generate/thumb calls if the client wishes to
-override the default settings.
+override the default settings mentioned above.
+
+Unimplemented features:  A PUT that would allow a client to
+override a thumbnail directly if there were some sort of issue that
+needed to be corrected.  A DELETE to remove a cached file and force
+it to be re-created.  (For that matter, just a query string
+parameter could say 'force_recreate" or something would also work).
+
+See Makefile.PL for required modules, some of which will
+require libraries or binaries (e.g. Image Magick).

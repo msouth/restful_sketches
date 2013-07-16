@@ -4,29 +4,31 @@ restful_sketches
 A couple of quick and dirty RESTful services
 
 Both of these are done with Dancer apps, and most of the
-files are just the default files generated from Dancer -a Restful::Foo
+files are just the default files generated from 
+
+    Dancer -a Restful::Foo
 
 -------------------------
 
 # Restful::Spellcheck #
 
-The spellcheck uses aspell.  You can hit it with 
+The spellcheck uses aspell.  You can hit it with a GET to 
 
-/check/foo.json
+    /check/foo.json
 
 and it will give you spelling suggestions for "foo", returned in JSON
 serialization.  Or you can get it serialized as XML or YAML, by putting
-.xml or .yml on the end.
+`.xml` or `.yml` on the end.
 
 You can specify the dictionary you want to look in, if more than one are
 available.  A list of available dictionaries is retrievable with a GET to
-/dictionaries/list
+`/dictionaries/list`
 
-The language is defaulted to en_US, but you can put a ?language=es at the
+The language is defaulted to `en_US`, but you can put a `?language=es` at the
 end of your url to get Spanish (if you have that dictionary available).
 
 The response is extensible--it returns a hash (or whatever the format's
-equivalent is) with a boolean value called 'check' which will be a 1 or
+equivalent is) with a boolean value called 'check' which will be a one or
 a zero depending on whether the word was found in the dictionary.  If the
 value of check is zero, the word was not found, and there will be another
 key called 'suggestions' with a list of suggested spellings.
@@ -130,11 +132,11 @@ size, and in jpeg format, because the source was a jpeg).  But the url in
 the Location: header can be used to access that file from now on.
 
 From this point forward, it is also possible to request, for example,
-http://localhost:3000/thumb/7/100x100.png to get a png version or
-http://localhost:3000/thumb/7/300x300.jpg to get a larger jpeg.
+`http://localhost:3000/thumb/7/100x100.png` to get a png version or
+`http://localhost:3000/thumb/7/300x300.jpg` to get a larger jpeg.
 
 'size' and 'ext' parameters may also be put into the query string
-(or post data) in /generate/thumb calls if the client wishes to
+(or post data) in `/generate/thumb` calls if the client wishes to
 override the default settings mentioned above.
 
 Unimplemented features:  A PUT that would allow a client to
